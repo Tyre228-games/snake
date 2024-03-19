@@ -5,7 +5,7 @@ from random import randint
 pygame.init()
 
 
-# windos set up
+# windows set up
 WINDOW_WINDTH = 600
 WINDOW_HEIGHT = 600
 
@@ -19,8 +19,6 @@ SQUARE_SIZE = 30
 
 # snake
 class Snake():
-    SPEED = 5
-
     def __init__(self, x, y):
         self.x = self.original_x = x
         self.y = self.original_y = y
@@ -119,7 +117,7 @@ def draw_background():
             color = flip_color(color)
 
 
-# game loop
+# game loop variables
 running = True
 clock = pygame.time.Clock()
 FPS = 60
@@ -132,7 +130,7 @@ counter = 0
 score = 0
 snakeDirection = "right"
 
-
+# game loop
 while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -159,10 +157,12 @@ while running:
         snake.move()
         counter = 0
         if snake.is_collision_with_borders() or snake.is_collision_with_itself():
+            # rendering the message
             text = FONT.render("You lost, your score is " + str(score), True, (0, 0, 0))
             screen.blit(text, (WINDOW_WINDTH//2 - text.get_width()//2, WINDOW_HEIGHT//2 - text.get_height()//2))
             pygame.display.flip()
             pygame.time.delay(3000)
+            # reseting the game
             snake.reset()
             orange_x, orange_y = generate_coordinates_for_orange(snake.blocks)
             orange.reset(orange_x, orange_y)
