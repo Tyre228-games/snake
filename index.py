@@ -122,6 +122,7 @@ running = True
 clock = pygame.time.Clock()
 FPS = 60
 FONT = pygame.font.Font(None, 36)
+joysticks = [pygame.joystick.Joystick(i) for i in range(pygame.joystick.get_count())]
 
 snake = Snake(210, 210)
 orange_x, orange_y = generate_coordinates_for_orange(snake.blocks)
@@ -166,6 +167,8 @@ while running:
             snake.reset()
             orange_x, orange_y = generate_coordinates_for_orange(snake.blocks)
             orange.reset(orange_x, orange_y)
+            snakeDirection = "right"
+            snake.direction = "right"
             score = 0
         elif snake.is_collision_with_orange(orange.x, orange.y):
             snake.eat()
